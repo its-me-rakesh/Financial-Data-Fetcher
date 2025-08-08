@@ -7,7 +7,7 @@ from io import BytesIO
 st.cache_data.clear()
 st.cache_resource.clear()
 
-st.set_page_config(page_title="Yahoo Finance Data Fetcher", layout="wide")
+st.set_page_config(page_title="Finance Data Fetcher", layout="wide")
 
 # ----------------------
 # Helper function to display & download data
@@ -157,3 +157,4 @@ if st.button("Fetch Data", disabled=not all_fields_filled):
 
     except Exception as e:
         st.error(f"Error fetching data: {e}")
+
