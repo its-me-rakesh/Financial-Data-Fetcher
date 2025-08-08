@@ -96,6 +96,98 @@ if fetch_button:
         except Exception as e:
             st.error(f"Error fetching data: {e}")
 
+            # ------------------- EXTRA SECTIONS -------------------
+            st.markdown("---")
+            st.subheader("📂 Additional Data Sections")
+
+            sections = [
+                "Dividends",
+                "Splits",
+                "Recommendations",
+                "Sustainability (ESG)",
+                "Institutional Holders",
+                "Mutual Fund Holders",
+                "Major Holders",
+                "Earnings",
+                "Quarterly Earnings",
+                "Financials (Annual)",
+                "Quarterly Financials",
+                "Balance Sheet (Annual)",
+                "Quarterly Balance Sheet",
+                "Cashflow (Annual)",
+                "Quarterly Cashflow",
+                "Analyst Price Targets",
+                "Calendar Events",
+                "Options Data"
+            ]
+
+            selected_section = st.selectbox("Select a data section to view", sections)
+
+            if selected_section == "Dividends":
+                st.dataframe(stock.dividends)
+
+            elif selected_section == "Splits":
+                st.dataframe(stock.splits)
+
+            elif selected_section == "Recommendations":
+                st.dataframe(stock.recommendations)
+
+            elif selected_section == "Sustainability (ESG)":
+                st.dataframe(stock.sustainability)
+
+            elif selected_section == "Institutional Holders":
+                st.dataframe(stock.institutional_holders)
+
+            elif selected_section == "Mutual Fund Holders":
+                st.dataframe(stock.mutualfund_holders)
+
+            elif selected_section == "Major Holders":
+                st.dataframe(stock.major_holders)
+
+            elif selected_section == "Earnings":
+                st.dataframe(stock.earnings)
+
+            elif selected_section == "Quarterly Earnings":
+                st.dataframe(stock.quarterly_earnings)
+
+            elif selected_section == "Financials (Annual)":
+                st.dataframe(stock.financials)
+
+            elif selected_section == "Quarterly Financials":
+                st.dataframe(stock.quarterly_financials)
+
+            elif selected_section == "Balance Sheet (Annual)":
+                st.dataframe(stock.balance_sheet)
+
+            elif selected_section == "Quarterly Balance Sheet":
+                st.dataframe(stock.quarterly_balance_sheet)
+
+            elif selected_section == "Cashflow (Annual)":
+                st.dataframe(stock.cashflow)
+
+            elif selected_section == "Quarterly Cashflow":
+                st.dataframe(stock.quarterly_cashflow)
+
+            elif selected_section == "Analyst Price Targets":
+                try:
+                    st.dataframe(stock.analyst_price_targets)
+                except:
+                    st.warning("Analyst price targets not available.")
+
+            elif selected_section == "Calendar Events":
+                st.dataframe(stock.calendar)
+
+            elif selected_section == "Options Data":
+                expiries = stock.options
+                if expiries:
+                    expiry = st.selectbox("Select Expiry Date", expiries)
+                    st.dataframe(stock.option_chain(expiry).calls)
+                    st.dataframe(stock.option_chain(expiry).puts)
+                else:
+                    st.warning("No options data available.")
+
+
 # ------------------- FOOTER -------------------
 st.markdown("---")
 st.caption("Developed by Rakesh Chourasia")
+
