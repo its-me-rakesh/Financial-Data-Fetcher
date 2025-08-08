@@ -120,74 +120,86 @@ sections = [
     "Calendar Events",
     "Options Data"
 ]
+
 selected_section = st.selectbox("Select a data section to view", sections)
 
+def display_data(data):
+    if data is None or (hasattr(data, 'empty') and data.empty):
+        st.warning("No data available for this section.")
+    else:
+        st.dataframe(data)
+
 if selected_section == "Dividends":
-    st.dataframe(stock.dividends)
+    display_data(stock.dividends)
 
 elif selected_section == "Splits":
-    st.dataframe(stock.splits)
+    display_data(stock.splits)
 
 elif selected_section == "Recommendations":
-    st.dataframe(stock.recommendations)
+    display_data(stock.recommendations)
 
 elif selected_section == "Sustainability (ESG)":
-    st.dataframe(stock.sustainability)
+    display_data(stock.sustainability)
 
 elif selected_section == "Institutional Holders":
-    st.dataframe(stock.institutional_holders)
+    display_data(stock.institutional_holders)
 
 elif selected_section == "Mutual Fund Holders":
-    st.dataframe(stock.mutualfund_holders)
+    display_data(stock.mutualfund_holders)
 
 elif selected_section == "Major Holders":
-    st.dataframe(stock.major_holders)
+    display_data(stock.major_holders)
 
 elif selected_section == "Earnings":
-    st.dataframe(stock.earnings)
+    display_data(stock.earnings)
 
 elif selected_section == "Quarterly Earnings":
-    st.dataframe(stock.quarterly_earnings)
+    display_data(stock.quarterly_earnings)
 
 elif selected_section == "Financials (Annual)":
-    st.dataframe(stock.financials)
+    display_data(stock.financials)
 
 elif selected_section == "Quarterly Financials":
-    st.dataframe(stock.quarterly_financials)
+    display_data(stock.quarterly_financials)
 
 elif selected_section == "Balance Sheet (Annual)":
-    st.dataframe(stock.balance_sheet)
+    display_data(stock.balance_sheet)
 
 elif selected_section == "Quarterly Balance Sheet":
-    st.dataframe(stock.quarterly_balance_sheet)
+    display_data(stock.quarterly_balance_sheet)
 
 elif selected_section == "Cashflow (Annual)":
-    st.dataframe(stock.cashflow)
+    display_data(stock.cashflow)
 
 elif selected_section == "Quarterly Cashflow":
-    st.dataframe(stock.quarterly_cashflow)
+    display_data(stock.quarterly_cashflow)
 
 elif selected_section == "Analyst Price Targets":
     try:
-        st.dataframe(stock.analyst_price_targets)
+        display_data(stock.analyst_price_targets)
     except:
         st.warning("Analyst price targets not available.")
 
 elif selected_section == "Calendar Events":
-    st.dataframe(stock.calendar)
+    display_data(stock.calendar)
 
 elif selected_section == "Options Data":
     expiries = stock.options
     if expiries:
         expiry = st.selectbox("Select Expiry Date", expiries)
-        st.dataframe(stock.option_chain(expiry).calls)
-        st.dataframe(stock.option_chain(expiry).puts)
+        chain = stock.option_chain(expiry)
+        st.markdown("**Calls**")
+        display_data(chain.calls)
+        st.markdown("**Puts**")
+        display_data(chain.puts)
     else:
         st.warning("No options data available.")
+
 
 
 # ------------------- FOOTER -------------------
 st.markdown("---")
 st.caption("Developed by Rakesh Chourasia")
+
 
 
