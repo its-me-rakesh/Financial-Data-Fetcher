@@ -50,9 +50,9 @@ st.title("📊 Yahoo Finance Data Fetcher")
 # ----------------------
 col1, col2, col3 = st.columns([3, 2, 2])
 with col1:
-    ticker_symbol = st.text_input("Enter NSE/BSE Symbol (e.g., RELIANCE.NS, TCS.BO)", value="RELIANCE.NS")
+    ticker_symbol = st.text_input("Enter NSE/BSE Symbol (e.g., RELIANCE.NS, TCS.BO)", value="")
 with col2:
-    start_date = st.date_input("Start Date", value=pd.to_datetime("2023-01-01"))
+    start_date = st.date_input("Start Date", value=pd.to_datetime(""))
 with col3:
     end_date = st.date_input("End Date", value=pd.to_datetime("today"))
 
@@ -156,4 +156,5 @@ if st.button("Fetch Data"):
 
         except Exception as e:
             st.error(f"Error fetching data: {e}")
+
 
