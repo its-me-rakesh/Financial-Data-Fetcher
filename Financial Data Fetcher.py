@@ -2,6 +2,11 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 from io import BytesIO
+from datetime import date
+
+# Clear cache every time page reloads
+st.cache_data.clear()
+st.cache_resource.clear()
 
 st.set_page_config(page_title="Yahoo Finance Data Fetcher", layout="wide")
 
@@ -151,3 +156,4 @@ if st.button("Fetch Data"):
 
         except Exception as e:
             st.error(f"Error fetching data: {e}")
+
