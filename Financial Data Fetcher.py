@@ -129,14 +129,21 @@ if st.button("Fetch Data"):
 
         with tabs[10]:
             st.subheader("👥 Holders")
-            st.markdown("**Institutional Holders**")
-            display_data(stock.institutional_holders, "Institutional Holders")
-            st.markdown("**Mutual Fund Holders**")
-            display_data(stock.mutualfund_holder)
-            # Dividends & Splits
-            display_data(stock.dividends, "Dividends")
-            display_data(stock.splits, "Stock Splits")
+            try:
+                st.markdown("**Institutional Holders**")
+                display_data(stock.institutional_holders, "Institutional Holders")
+        
+                st.markdown("**Mutual Fund Holders**")
+                display_data(stock.mutualfund_holders, "Mutual Fund Holders")
+        
+                st.markdown("**Major Holders Breakdown**")
+                display_data(stock.major_holders, "Major Holders")
+
+            except Exception as e:
+                st.error(f"Error fetching holders data: {e}")
+
     
         except Exception as e:
             st.error(f"Error fetching data: {e}")
+
 
