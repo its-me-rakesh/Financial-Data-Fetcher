@@ -132,4 +132,11 @@ if st.button("Fetch Data"):
             st.markdown("**Institutional Holders**")
             display_data(stock.institutional_holders, "Institutional Holders")
             st.markdown("**Mutual Fund Holders**")
-            display_data(stock.mutualfund_holder
+            display_data(stock.mutualfund_holder)
+            # Dividends & Splits
+            display_data(stock.dividends, "Dividends")
+            display_data(stock.splits, "Stock Splits")
+    
+        except Exception as e:
+            st.error(f"Error fetching data: {e}")
+
